@@ -1,22 +1,21 @@
 <template>
 	<el-container>
-	  <el-header class='top'>
-	  	<top></top>
-	  </el-header>
-	  <el-container>
-	    <el-aside width="200px">
+		<el-aside width="200px" class='asideCti'>
 	    	<left></left>
 	    </el-aside>
-	    <el-container>
-	      <el-main>
-	      	<router-view/>
-	      </el-main>
+	     <el-container>
+	     	<el-header class='top'>
+		  		<top></top>
+		  	</el-header>
+	      	<el-main>
+	      		<router-view/>
+	      	</el-main>
+	      	<el-footer>
+			  	<foot></foot>
+			</el-footer>
 	    </el-container>
-	  </el-container>
-	  <el-footer>
-	  	<foot></foot>
-	  </el-footer>
 	</el-container>
+	
 </template>
 
 <script>
@@ -39,5 +38,13 @@
 	}
 	.top{
 		margin-bottom: 10px;
+	}
+	.asideCti{
+	    height: 100vh;
+	    background-color: rgb(84, 92, 100);
+	    color: #fff;
+	}
+	.el-main{
+		background: #F5F7FA;
 	}
 </style>
