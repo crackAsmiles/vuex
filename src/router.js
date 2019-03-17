@@ -39,34 +39,34 @@ export default new Router({
       component: Login
     },
     {
-    	path: '/page/',
-    	name: 'page',
+    	path: '/page',
     	component: Page,
+		redirect:'/page/home',
     	children:[
       	{
-      		path: ' ',
+      		path: 'home',
       		name: 'home',
       		title:'主页',
       		icon:'el-icon-location',
       		component: Home
       	},
       	{
-      		path: 'usermanage/',
+      		path: '/page/usermanage',
       		name: 'usermanage',
       		title:'用户管理',
       		icon:'el-icon-document',
       		component: Usermanage,
       		children: [
       			{
-      				path: '',
+      				path: '/page/usermanage',
 		      		name: 'usermanagelist',
 		      		title:'用户管理列表',
 		      		icon:'el-icon-document',
 		      		component: Usermanagelist
       			},
       			{
-      				path: 'usermanagedetail',
-		      		name: 'usermanagelist',
+      				path: '/page/usermanage/usermanagedetail',
+		      		name: 'usermanagedetail',
 		      		title:'用户管理详情',
 		      		icon:'el-icon-document',
 		      		component: Usermanagedetail
@@ -88,35 +88,35 @@ export default new Router({
       		component: Homemaking,
       		children: [
       			{
-      				path: '',
+      				path: '/page/homemaking',
 		      		name: 'homemakinglist',
 		      		title:'家政事推荐列表',
 		      		icon:'el-icon-location',
 		      		component: Homemakinglist,
       			},
       			{
-      				path: 'homemakingdetail',
+      				path: '/page/homemaking/homemakingdetail',
 		      		name: 'homemakingdetail',
 		      		title:'推荐详情',
 		      		icon:'el-icon-location',
 		      		component: Homemakingdetail,
       			},
       			{
-      				path: 'homemakingadd',
+      				path: '/page/homemaking/homemakingadd',
 		      		name: 'homemakingadd',
 		      		title:'添加推荐',
 		      		icon:'el-icon-location',
 		      		component: Homemakingadd,
       			},
       			{
-      				path: 'textdetail',
+      				path: '/page/homemaking/textdetail',
 		      		name: 'textdetail',
 		      		title:'标题详情(图文)',
 		      		icon:'el-icon-location',
 		      		component: Textdetail,
       			},
       			{
-      				path: 'videodetail',
+      				path: '/page/homemaking/videodetail',
 		      		name: 'videodetail',
 		      		title:'标题详情(视频)',
 		      		icon:'el-icon-location',

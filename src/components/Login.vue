@@ -65,7 +65,7 @@
 	.loginContai {
 		height:100vh;
 		width: 100%;
-		background-image: url(../assets/images/01.png);
+		background-image: url(../assets/images/bg.jpg);
 		background-size: cover;
 		color: #fff;
 	}

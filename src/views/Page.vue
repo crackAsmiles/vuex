@@ -40,11 +40,14 @@
 		margin-bottom: 10px;
 	}
 	.asideCti{
-	    height: 100vh;
+	    min-height: 100vh;
 	    background-color: rgb(84, 92, 100);
 	    color: #fff;
+		height: 100%;
+		background-color: rgb(84, 92, 100);
 	}
 	.el-main{
 		background: #F5F7FA;
+		padding: 10px 20px;
 	}
 </style>

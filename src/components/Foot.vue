@@ -9,8 +9,7 @@
 
 <style>
 	.topContai {
-		border-top: 2px solid #D9D9D9;
-		background-image:url(../assets/images/bg.jpg);
+		background-image:url(../assets/images/top.jpg);
 		background-size: cover;
 	}
 	.topContai h2{
