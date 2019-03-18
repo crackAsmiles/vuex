@@ -50,4 +50,13 @@
 		background: #F5F7FA;
 		padding: 10px 20px;
 	}
+	/*.bg_phone{
+		background-image: url(../../public/image/true.png);
+		background-size:cover ;
+	}*/
+	/*.el-message-box{
+		background: transparent;
+		background-image: url(../../public/image/true.png);
+		background-size:cover ;
+	}*/
 </style>

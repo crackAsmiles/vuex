@@ -49,7 +49,7 @@
 	export default {
 		methods: {
 	      handleLook(row) {
-	        console.log(row);
+	        this.$router.push('/page/usermanage/usermanagedetail')
 	      },
 		  onSubmit(){
 			  console.log('查询')

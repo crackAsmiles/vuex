@@ -1,6 +1,6 @@
 <template>
 	<div class="topContai">
-		<h2>这是底部导航</h2>
+		<h2>lao si ji system</h2>
 	</div>
 </template>
 

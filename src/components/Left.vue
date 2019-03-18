@@ -65,4 +65,7 @@
 		color: #fff;
 		font-weight: bolder;
 	}
+	.el-submenu .el-menu-item {
+		box-sizing: border-box;
+	}
 </style>

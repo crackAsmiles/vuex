@@ -38,21 +38,6 @@
 			  <p>2019-3-21 13:42</p>
 		  </el-col>
 		</el-row>
-		<el-row class='borderB'></el-row>
-		<el-row>
-			<el-col :span="4">
-				<div class='sltCtai'>
-					  <img src="../../assets/images/03.jpg" alt="">
-				</div>
-			</el-col>
-			<el-col :span="12" class='intro'>
-				<p>卫生间清洁</p>
-				<p>卫生间清洁，卫生间清洁卫生间清洁卫生间清洁卫生间清洁卫生间清洁卫生间清洁</p>
-			</el-col>
-			<el-col :span="8">
-				<p>2019-3-22 13:42</p>
-			</el-col>
-		</el-row>
 	</div>
 </template>
 

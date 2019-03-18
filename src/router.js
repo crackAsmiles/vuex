@@ -20,8 +20,6 @@ import Homemaking from './components/homemaking/Homemaking'
 import Homemakinglist from './components/homemaking/Homemakinglist'
 import Homemakingdetail from './components/homemaking/Homemakingdetail'
 import Homemakingadd from './components/homemaking/Homemakingadd'
-import Textdetail from './components/homemaking/Textdetail'
-import Videodetail from './components/homemaking/Videodetail'
 
 import Helpcenter from './components/helpcenter/Helpcenter'
 
@@ -90,7 +88,7 @@ export default new Router({
       			{
       				path: '/page/homemaking',
 		      		name: 'homemakinglist',
-		      		title:'家政事推荐列表',
+		      		title:'推荐列表',
 		      		icon:'el-icon-location',
 		      		component: Homemakinglist,
       			},
@@ -107,20 +105,6 @@ export default new Router({
 		      		title:'添加推荐',
 		      		icon:'el-icon-location',
 		      		component: Homemakingadd,
-      			},
-      			{
-      				path: '/page/homemaking/textdetail',
-		      		name: 'textdetail',
-		      		title:'标题详情(图文)',
-		      		icon:'el-icon-location',
-		      		component: Textdetail,
-      			},
-      			{
-      				path: '/page/homemaking/videodetail',
-		      		name: 'videodetail',
-		      		title:'标题详情(视频)',
-		      		icon:'el-icon-location',
-		      		component: Videodetail,
       			}
       		]
       	},
