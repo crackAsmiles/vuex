@@ -28,12 +28,10 @@
 	        },
 	        rules: {
 	          name: [
-	            { required: true, message: '请输入活动名称', trigger: 'blur' },
-	            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+	            { required: true, message: '请输入活动名称', trigger: 'blur' }
 	          ],
 	          pws: [
-	          	{ required: true, message: '请输入密码', trigger: 'blur' },
-	            { min: 6,max:8, message: '密码在6-8位之间', trigger: 'blur' }
+	          	{ required: true, message: '请输入密码', trigger: 'blur' }
 	          ]
 	        }
 	      };
@@ -43,13 +41,22 @@
 	        this.$refs[formName].validate((valid) => {
 	          if (valid) {
 	            let user = {};
-	            user['name'] = this.ruleForm.name;
-	            user['pws'] = this.ruleForm.pws;
+	            user['username'] = this.ruleForm.name;
+	            user['password'] = this.ruleForm.pws;
 	            var exriesDate = new Date().getDate();
 	            var expried = new Date();
 	            expried.setDate( exriesDate + 7 );
-	            this.cookies.set('user',user,expried);
-	            this.$router.push('/page');
+	            this.axios.post('/api/users/login',user)
+	            .then(res => {
+	            	console.log(res)
+	            	this.cookies.set('token',res.data,expried);
+	            	// 以后请求都设置请求头
+	            	this.axios.defaults.headers.common['Authentication-token'] = res.data;
+	            	this.$router.push('/page');
+	            })
+	            .catch(err => {
+	            	this.$alert(err,'',{});
+	            })
 	          } else {
 	            console.log('error submit!!');
 	            return false;

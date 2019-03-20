@@ -5,36 +5,44 @@
 		</p>
 		
 		<el-table :data="tableData" border style="width: 100%">
-		    <el-table-column align='center' fixed prop="date" label="学习时间"></el-table-column>
-			<el-table-column prop="content" label="推荐内容" >
+		    <el-table-column align='center' fixed prop="day" label="学习时间">
+		    	<template scope='scope'>
+		    		<span>第 {{scope.row.day}} 天</span>
+		    	</template>
+		    </el-table-column>
+			<el-table-column prop="recommend_detail" label="推荐内容" >
 				<template scope="scope">
-					<div v-for="(item,index) in scope.row.content" :accesskey="item">
-						<p class="contentSty"  @click="openImgView">{{item}}</p>
+					<div v-for="(item,index) in scope.row.recommend_detail" :accesskey="item">
+						<p class="contentSty"  @click="openImgView(item)">{{item.title}}</p>
 					</div>
                </template>
 			</el-table-column>
-		    <el-table-column  align='center' prop="status" label="推荐状态"></el-table-column>
+		    <el-table-column  align='center' prop="status" label="推荐状态">
+		    	<template scope='scope'>
+		    		<span>{{ scope.row.status?'推荐中':'未推荐'}}</span>
+		    	</template>
+		    </el-table-column>
 		    <el-table-column align='center' label="操作">
 		      <template slot-scope="scope">
-		        <el-button @click="handleLook(scope.row)" type="text" size="small">修改</el-button>
-		        <el-button @click="handleDel(scope.row)" type="text" size="small">删除</el-button>
+		        <el-button @click="handleLook(scope.row.day)" type="text" size="small">修改</el-button>
+		        <el-button @click="handleDel(scope.row.id)" type="text" size="small">删除</el-button>
 		      </template>
 		    </el-table-column>
 		 </el-table>
 		 
 		 <el-pagination
 		  :page-size="20"
-		  :pager-count="11"
+		  :pager-count="5"
 		  layout="prev, pager, next"
-		  :total="1000">
+		  :total="tableTotal">
 		</el-pagination>
 		
 		<el-dialog :visible.sync="dialogVisible" width="30%">
 		  <div style="text-align: left;">	
-        		<p class="dialogOp">鸡蛋牛奶</p>
+        		<p class="dialogOp">{{ dialog.title }}</p>
 				<div class="imgCtai">
-					<img v-if='isimg' style='width:100%' src="../../assets/images/03.jpg"/>
-					<video v-if='!isimg' style='width:100%' src="../../../public/vedio/vedio.mp4" controls="controls"></video>
+					<img v-if='isimg' style='width:100%' :src="dialog.pic"/>
+					<video v-if='!isimg' style='width:100%' :src="dialog.pic" controls="controls"></video>
 				</div>
 				<p class="dialogOp">牛奶和鸡蛋最好不要通吃。</p>
 				<div>
@@ -52,30 +60,59 @@
 </template>
 
 <script>
+	function getList(_this){
+    	_this.axios.get('/api/laosiji/web/recommend/list?page='+_this.page+'&per_page='+_this.pageNum)
+    	.then(res => {
+    		console.log(res);
+    		_this.tableTotal = res.data.total;
+    		_this.tableData = res.data.items;
+    		
+    	})
+    	.catch(err => {
+    		_this.$alert(err,'',{});
+    	})
+	}
 	export default {
 		methods: {
 			toAddStudy(){
-				this.$router.push('/page/homemaking/homemakingadd');
+				var day = this.tableData[this.tableData.length-1]?this.tableData[this.tableData.length-1].day+1:1;
+				this.$router.push({
+					name:'homemakingadd',
+					params: {
+						id:day
+					}
+				});
 			},
-		    handleLook(row) {
-		        console.log(row);
-		        this.$router.push('/page/homemaking/homemakingdetail');
+		    handleLook(day) {
+		        this.$router.push({
+		        	name:'homemakingdetail',
+		        	params:{id:day}
+		        });
 		    },
 	        handleDel(row) {
 	        	console.log(row);
-	         	this.$confirm('确认删除？')
-		          .then(_ => {
-		            done();
-		          })
-		          .catch(_ => {});
+	         	this.$confirm('您确定要删除吗?', '提示信息', {
+		          confirmButtonText: '确定',
+		          cancelButtonText: '取消',
+		          type: 'warning'
+		        }).then(() => {
+		          this.$message({
+		            type: 'success',
+		            message: '删除成功!'
+		          });
+		        }).catch(() => {
+		          return;         
+		        });
 	      	},
-	      	openImgView(index) {
+	      	openImgView(pam) {
 	      		this.dialogVisible = true;
-		        if(index%2 == 0){
+	      		console.log(pam)
+		        if(pam.pic.indexOf(".mp4") ==-1){
 		        	this.isimg = true;
 		        }else{
 		        	this.isimg = false;
 		        }
+		        this.dialog = pam;
 		    },
 		    
 	    },
@@ -83,28 +120,15 @@
 	      return {
 	      	dialogVisible:false,
 	      	isimg: true,
-	        tableData: [{
-	        	date:'第一天',
-	        	content: ['1、阿姨上户须知','2、上户礼仪须知','3、日常用品养护须知'],
-	        	status:'推荐中'
-	        },
-	        {
-	        	date:'第二天',
-	        	content: ['1、阿姨上户须知','2、上户礼仪须知','3、日常用品养护须知'],
-	        	status:'推荐中'
-	        },
-	        {
-	        	date:'第三天',
-	        	content: ['1、阿姨上户须知','2、上户礼仪须知','3、日常用品养护须知'],
-	        	status:'推荐中'
-	        },
-	        {
-	        	date:'第四天',
-	        	content: ['1、阿姨上户须知','2、上户礼仪须知','3、日常用品养护须知'],
-	        	status:'推荐中'
-	        }
-	        ]
+	      	tableTotal:0,
+	      	page:1,
+	      	pageNum:5,
+	      	dialog: {},
+	        tableData: []
 	      }
+	    },
+	    created(){
+	    	getList(this);
 	    }
 	}
 </script>

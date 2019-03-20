@@ -3,9 +3,6 @@ import Router from 'vue-router'
 import Login from './components/Login'
 import Page from './views/Page'
 import Notfound from './views/Notfound'
-import Item1 from './components/Item1'
-import Item2 from './components/Item2'
-import Item3 from './components/Item3'
 
 import Home from './components/home/Home'
 
